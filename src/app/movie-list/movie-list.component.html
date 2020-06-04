@@ -1,0 +1,27 @@
+<br>
+<br>
+<div class="row">
+    <div class="col-8 text-center">
+        <app-pagination [totalSize]='movieList?.count' [currentPage]='parameters.page' [pageSize]='parameters.pageSize'
+            (changePage)='updateMovies($event)'>
+        </app-pagination>
+    </div>
+    <div class="col-4 text-center">
+        <form>
+            <label>Sort By:</label>
+            <select name="sort" class="form-control" [(ngModel)]="parameters.sort" (change)='updateMovies($event)'>
+                <option value="rating">Rating</option>
+                <option value="year">Year</option>
+            </select>
+        </form>
+        <span><button class="btn btn-primary mt-2"
+                [ngClass]="changeArrow == true ? 'fa fa-arrow-up' : 'fa fa-arrow-down'"
+                (click)='updateParams()'></button></span>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-8" *ngFor="let item of movieList?.results">
+        <app-movie-item [movie]='item'></app-movie-item>
+    </div>
+</div>
